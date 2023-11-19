@@ -3,28 +3,36 @@ package com.Tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.pages.LoginPage;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginTest{
 	WebDriver driver;
     LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         // Set up WebDriver and open the application
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Dell1\\Downloads\\chromedriver-win64\\chromedriver-win64");
+//    	ChromeOptions options = new ChromeOptions();
+//    	options.setBinary("C:\\Users\\Dell1\\Downloads\\chrome-win64");
+//    	WebDriver driver = new ChromeDriver(options);
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Dell1\\Downloads\\chromedriver-win64");
+    	WebDriverManager.chromedriver();
         driver = new ChromeDriver();
-        driver.get("https://classic.freecrm.com/");
+        driver.get("https://www.saucedemo.com/v1/index.html");
+        
 
         // Initialize Page Object
         loginPage = new LoginPage(driver);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         // Close the browser
         if (driver != null) {
@@ -32,58 +40,58 @@ public class LoginTest{
         }
     }
 
-    @Test
+    @Test(priority=1)
     public void loginWithValidCredentials() {
-        loginPage.login("validUsername", "validPassword");
+        loginPage.login("standard_user", "secret_sauce");
 
        
     }
 
-    @Test
+    @Test(priority=2)
     public void loginWithInvalidCredentials() {
-        loginPage.login("invalidUsername", "invalidPassword");
+        loginPage.login("standard", "secret");
 
         // Verify that an error message is displayed
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, "Invalid credentials. Please try again.");
+        Assert.assertEquals(actualErrorMessage, "Epic sadface: Username and password do not match any user in this service");
     }
 
-    @Test
+    @Test(priority=3)
     public void loginWithEmptyFields() {
         loginPage.login("", "");
 
         // Verify that an error message is displayed for empty fields
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, "Username and password are required.");
+        Assert.assertEquals(actualErrorMessage, "Epic sadface: Username is required");
     }
     
-    @Test
+    @Test(priority=4)
     public void loginWithInvalidUsername() {
-        loginPage.login("invalidUsername", "validPassword");
+        loginPage.login("standard", "secret_sauce");
 
         // Verify that an error message is displayed for an invalid username
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, "Invalid username. Please try again.");
+        Assert.assertEquals(actualErrorMessage, "Epic sadface: Username and password do not match any user in this service");
     }
 
-    @Test
+    @Test(priority=5)
     public void loginWithInvalidPassword() {
-        loginPage.login("validUsername", "invalidPassword");
+        loginPage.login("standard_user", "secret");
 
         // Verify that an error message is displayed for an invalid password
         String actualErrorMessage = loginPage.getErrorMessage();
-        Assert.assertEquals(actualErrorMessage, "Invalid password. Please try again.");
+        Assert.assertEquals(actualErrorMessage, "Epic sadface: Username and password do not match any user in this service");
     }
 
-    @Test
+    @Test(priority=6)
     public void loginWithIncorrectCredentialsMultipleTimes() {
         // Attempt to log in with incorrect credentials multiple times
         for (int i = 0; i < 3; i++) {
-            loginPage.login("invalidUsername", "invalidPassword");
+            loginPage.login("standard", "secret");
 
             // Verify error message
             String actualErrorMessage = loginPage.getErrorMessage();
-            Assert.assertEquals(actualErrorMessage, "Invalid credentials. Please try again.");
+            Assert.assertEquals(actualErrorMessage, "Epic sadface: Username and password do not match any user in this service");
         }
     }
 

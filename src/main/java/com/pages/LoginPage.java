@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage {
 	
 		
-	private final WebDriver driver;
+	WebDriver driver;
 
     // Constructor to initialize the WebDriver
     public LoginPage(WebDriver driver) {
@@ -15,10 +15,10 @@ public class LoginPage {
     }
 
     // Locators
-    private final By usernameField = By.name("username");
+    private final By usernameField = By.name("user-name");
     private final By passwordField = By.name("password");
-    private final By loginButton = By.xpath("//button[@class='btn btn-small']");
-    private final By errorMessage = By.id("errorMessage");
+    private final By loginButton = By.id("login-button");
+    private final By errorMessage = By.xpath("//*[@id=\"login_button_container\"]/div/form/h3");
 
     // Methods for interaction with the page
 

@@ -7,12 +7,7 @@
         <methods>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="loginWithIncorrectCredentialsMultipleTimes"/>
-          <include name="loginWithInvalidCredentials"/>
-          <include name="loginWithInvalidUsername"/>
           <include name="loginWithEmptyFields"/>
-          <include name="loginWithInvalidPassword"/>
-          <include name="loginWithValidCredentials"/>
         </methods>
       </class> <!-- com.Tests.LoginTest -->
     </classes>
