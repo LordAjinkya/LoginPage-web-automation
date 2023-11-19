@@ -1,0 +1,2 @@
+The project is developed using java, selenium, tesng, chromedriver for automation of Login page scenarios of the website. The project does not completely use the page object model as there is only one page to be automated. I haven't used a test base class to separately declare the locators and other properties.                                   <img width="635" alt="image" src="https://github.com/LordAjinkya/LoginPage-web-automation/assets/55977408/e8a2bc3a-2d8c-4f5c-abf4-b6805046e29d">
+# LoginPage-web-automation
