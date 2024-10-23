@@ -1,5 +1,5 @@
 node{
-   stage('SCM checkout){
+   stage('SCM checkout'){
      git 'https://github.com/LordAjinkya/LoginPage-web-automation'
    }
    stage('compile-package'){
